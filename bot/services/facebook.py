@@ -200,7 +200,7 @@ class FacebookDownloader:
             except Exception as e:
                 last_error = e
                 cat = classify_error(str(e))
-                if cat in ("unavailable", "login_required"):
+                if cat == "unavailable":
                     raise
                 self._fire_source_failed(source_name, e)
                 logger.warning("%s не дал инфо: %s", source_name, e)
@@ -265,7 +265,7 @@ class FacebookDownloader:
                     logger.warning("%s не сработал: %s", source_name, e)
                     # ошибка на стороне контента — дальше не пробуем
                     cat = classify_error(str(e))
-                    if cat in ("unavailable", "login_required"):
+                    if cat == "unavailable":
                         self._fire_source_failed(source_name, e)
                         raise
                     self._fire_source_failed(source_name, e)
